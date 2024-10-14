@@ -1,5 +1,11 @@
  export default inventoryLoader
 
+ function delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+
+
  async function safeFetchJson(url) {
     const response = await fetch(url);
     if (!response.ok) {
@@ -14,6 +20,11 @@ async function inventoryLoader() {
     const combinedInventory = {};
 
     try {
+        //simulate loading delay
+        await delay(500);
+
+
+
         // Fetch data for each category
         await Promise.all(categories.map(async (category) => {
             const ingredients = await safeFetchJson(`http://localhost:8080/${category}`);

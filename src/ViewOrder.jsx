@@ -2,8 +2,8 @@ import { Prev } from "react-bootstrap/esm/PageItem";
 import { useOutletContext } from "react-router-dom";
 
 function ViewOrder() {
-  const context = useOutletContext(); 
-  const { shoppingCart } = context; // Förutsatt att shoppingCart skickas via kontexten
+
+  const {shoppingCart}  = useOutletContext(); // Förutsatt att shoppingCart skickas via kontexten
 
   if (!shoppingCart || shoppingCart.length === 0) {
     return <p>Kundvagnen är tom.</p>;
