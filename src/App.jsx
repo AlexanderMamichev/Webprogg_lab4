@@ -44,10 +44,6 @@ function App() {
       <Outlet context={{
         shoppingCart, 
         handleAddToCart,
-        foundation, setFoundation, 
-        protein, setProtein, 
-        extras, setExtras, 
-        dressing, setDressing
       }} />
     )}
 

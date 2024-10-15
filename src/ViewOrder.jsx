@@ -18,7 +18,7 @@ function ViewOrder() {
             {/* Rendera ingredienser */}
             {Object.keys(salad.ingredients).join(', ')} {/* Visa ingredienser */}
             <br />
-            {'Pris: ' + salad.getPrice() + ' kr'} {/* Kolla om denna metod är korrekt */}
+            {'Pris:' + salad.getPrice() + ' kr'} {/* Kolla om denna metod är korrekt */}
             <br />
             {'ID: ' + salad.uuid} {/* Se till att rätt UUID används */}
             {/* Rendera extras om det finns */}

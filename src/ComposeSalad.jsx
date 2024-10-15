@@ -8,14 +8,14 @@ import { useLoaderData } from 'react-router-dom';
 
 
 function ComposeSalad() {
-  //const { inventory, foundation, setFoundation, protein, setProtein, extras, setExtras, dressing, setDressing, handleAddToCart } = useOutletContext();
+  const {handleAddToCart}  = useOutletContext();
   const inventory  = useLoaderData(); // Provide a fallback for inventory
   console.log(inventory);
 
   const foundationList = inventory ? Object.keys(inventory).filter(name => inventory[name].foundation) : [];
   const proteinList = inventory ? Object.keys(inventory).filter(name => inventory[name].protein) : [];
   const dressingList = inventory ? Object.keys(inventory).filter(name => inventory[name].dressing) : [];
-  const [shoppingCart, setShoppingCart] = useState([]);
+  
 
 
   // State hooks for selected options
@@ -58,6 +58,8 @@ function ComposeSalad() {
       return;
     }
 
+    
+
     // Create a new salad
     const newSalad = new Salad();
     newSalad
@@ -71,13 +73,9 @@ function ComposeSalad() {
     });
 
     newSalad.uuid = uuidv4(); // Generate unique ID for the salad
-    const handleAddToCart = (newSalad) => {
-      setShoppingCart(prevCart => [...prevCart, newSalad]);
-      console.log("Uppdaterad korg" , shoppingCart);  
-    };
 
     // Add the salad to the shopping cart
-    handleAddToCart(newSalad); // Ensure handleAddToCart is defined in your context
+    handleAddToCart(newSalad); 
 
     // Reset form after submission
     setFoundation(''); // Reset to default value
