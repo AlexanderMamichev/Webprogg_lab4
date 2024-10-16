@@ -57,9 +57,6 @@ function ComposeSalad() {
       setTouched(true);
       return;
     }
-
-    
-
     // Create a new salad
     const newSalad = new Salad();
     newSalad
@@ -69,7 +66,7 @@ function ComposeSalad() {
 
     // Add selected extras
     Object.keys(extras).filter(extra => extras[extra]).forEach(extra => {
-      newSalad.add(extra, { selected: true });
+      newSalad.addExtra(extra, inventory[extra]); // Lägger till extra-ingrediensen från inventory
     });
 
     newSalad.uuid = uuidv4(); // Generate unique ID for the salad

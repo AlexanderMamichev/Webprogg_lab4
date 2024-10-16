@@ -16,8 +16,8 @@ function ViewOrder() {
         {shoppingCart.map((salad) => (
           <li key={salad.uuid}>
             {/* Rendera ingredienser */}
-            {Object.keys(salad.ingredients).join(', ')} {/* Visa ingredienser */}
-            <br />
+            {Object.values(salad.ingredients).join(', ')} {/* Visa ingredienser */}
+            <br/>
             {'Pris:' + salad.getPrice() + ' kr'} {/* Kolla om denna metod är korrekt */}
             <br />
             {'ID: ' + salad.uuid} {/* Se till att rätt UUID används */}
