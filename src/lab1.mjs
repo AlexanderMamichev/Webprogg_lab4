@@ -86,35 +86,35 @@ class Salad {
     return this;   // Returnerar Salad objektet för att kunna göra method chaining.  
    }
 
-   static parse(json){
+   static parse(json) {
     let parsedData; 
-       // parse JSON string
-    try{
-      parsedData = JSON.parse(json); 
-    }catch(error){
-      throw new Error ("Ivalid JSON string"); 
+    // parse JSON string
+    try {
+        parsedData = JSON.parse(json); 
+    } catch (error) {
+        throw new Error("Invalid JSON string"); 
     }
 
-  
-     // Function to create a Salad from an object
-    function createSaladFromObject(obj){
-      const salad = new Salad(); 
-      salad.uuid = obj.uuid; //Behåller den gamla UUID. 
-      for(const [name, properties] of Object.entries(obj)){
-        salad.add(name, properties);
-      }
-      return salad;
+    // Function to create a Salad from an object
+    function createSaladFromObject(obj) {
+        const salad = new Salad(); 
+        salad.uuid = obj.uuid; // Keep the old UUID. 
+        for (const [name, properties] of Object.entries(obj.ingredients || {})) { // Ensure we are accessing the ingredients property
+            salad.add(name, properties); // Add ingredient with properties
+            console.log(`Adding ingredient: ${name}, Price: ${properties.price}`); // Debugging log
+        }
+        return salad;
     }
 
-     // Check if the parsed data is an array or a single object
-    if(Array.isArray(parsedData)){
-      return parsedData.map(createSaladFromObject); 
-    }else if(typeof parsedData === 'object' && parsedData !== null){
-      return createSaladFromObject(parsedData); 
-    }else{
-      throw new Error("Ivalid data format"); 
+    // Check if the parsed data is an array or a single object
+    if (Array.isArray(parsedData)) {
+        return parsedData.map(createSaladFromObject); 
+    } else if (typeof parsedData === 'object' && parsedData !== null) {
+        return createSaladFromObject(parsedData); 
+    } else {
+        throw new Error("Invalid data format"); 
     }
-   }
+}
 
 }
 
@@ -133,8 +133,14 @@ console.log(JSON.stringify(myCaesarSalad) + '\n');
 console.log('\n--- Assignment 3 ---------------------------------------')
 
 Salad.prototype.getPrice = function() {
+  console.log(this.ingredients); // Log ingredients to verify their structure
+  
   return Object.values(this.ingredients)
-  .reduce((total, ingredient) => total + ingredient.price, 0 );
+    .reduce((total, ingredient) => {
+      const price = ingredient.price; 
+      console.log(`Adding price: ${price}`); // Log each price being added
+      return total + price;
+    }, 0);
 };
 
 Salad.prototype.count = function(property) {
