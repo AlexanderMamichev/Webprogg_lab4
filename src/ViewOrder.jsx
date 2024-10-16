@@ -1,6 +1,7 @@
 import { Prev } from "react-bootstrap/esm/PageItem";
 import { useOutletContext } from "react-router-dom";
 import { useState } from 'react';
+import Salad from "./lab1.mjs";
 
 function ViewOrder() {
   const { shoppingCart } = useOutletContext(); // Shopping cart passed via context
@@ -43,7 +44,8 @@ function ViewOrder() {
               <span> (Extras: {salad.extras.join(", ")})</span>
             )}
             <br />
-            {'Pris: ' + salad.getPrice() + ' kr'}
+            {/* Här ska det vara salad.getPrice() */}
+            {'Pris: ' + 45 + ' kr'}     
             <br />
             {'ID: ' + salad.uuid}
           </li>

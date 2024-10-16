@@ -138,7 +138,6 @@ Salad.prototype.getPrice = function() {
   return Object.values(this.ingredients)
     .reduce((total, ingredient) => {
       const price = ingredient.price; 
-      console.log(`Adding price: ${price}`); // Log each price being added
       return total + price;
     }, 0);
 };
@@ -147,6 +146,17 @@ Salad.prototype.count = function(property) {
   return Object.values(this.ingredients)
   .filter(ingredient => ingredient[property])
   .length;
+};
+
+Salad.prototype.add = function(type, name, price) {
+  this.ingredients[type] = name; // Store the ingredient
+  this.price += price; // Increment total price
+  return this; // Allow method chaining
+};
+
+Salad.prototype.addExtra = function(extraName, extra) {
+  this.extras.push(extraName); // Store the extra
+  this.price += extra.price; // Increment total price by the extra's price
 };
  
 

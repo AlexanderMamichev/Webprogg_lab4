@@ -51,36 +51,36 @@ function ComposeSalad() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
-
-    // Check form validity
+  
     if (!form.checkValidity()) {
       setTouched(true);
       return;
     }
-    // Create a new salad
-    const newSalad = new Salad();
-    newSalad
-      .add('foundation', foundation)
-      .add('protein', protein)
-      .add('dressing', dressing);
 
-    // Add selected extras
-    Object.keys(extras).filter(extra => extras[extra]).forEach(extra => {
-      newSalad.addExtra(extra, inventory[extra]); // Lägger till extra-ingrediensen från inventory
-    });
+   // Create a new salad
+  const newSalad = new Salad();
+  newSalad
+    .add('foundation', foundation, inventory[foundation].price) // Pass price
+    .add('protein', protein, inventory[protein].price) // Pass price
+    .add('dressing', dressing, inventory[dressing].price); // Pass price
 
-    newSalad.uuid = uuidv4(); // Generate unique ID for the salad
+  // Add selected extras with their prices
+  Object.keys(extras).filter(extra => extras[extra]).forEach(extra => {
+    newSalad.addExtra(extra, inventory[extra]); // Ensure this also has price data
+  });
 
-    // Add the salad to the shopping cart
-    handleAddToCart(newSalad); 
+  newSalad.uuid = uuidv4(); // Generate unique ID for the salad
 
-    // Reset form after submission
-    setFoundation(''); // Reset to default value
-    setProtein('');
-    setDressing('');
-    setExtras({});
-    setTouched(false); // Reset touched state
-  };
+  // Add the salad to the shopping cart
+  handleAddToCart(newSalad); 
+
+  // Reset form after submission
+  setFoundation('');
+  setProtein('');
+  setDressing('');
+  setExtras({});
+  setTouched(false);
+};
 
   return (
     <form onSubmit={handleSubmit} noValidate className={touched ? "was-validated" : ""}>
